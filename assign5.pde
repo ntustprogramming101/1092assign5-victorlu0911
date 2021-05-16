@@ -56,6 +56,11 @@ boolean isHit(float [] k, float [] l, int p){
             ay + ah > by &&    
             ay < by + bh;
   }
+  
+  int ss = gameTimer/60;
+  int second = ss % 60;
+  int minute = ss/60;
+  
 
 void setup() {
 	size(640, 480, P2D);
@@ -560,11 +565,8 @@ void drawDepthUI(){
 }
 
 void drawTimerUI(){
-  int ss = gameTimer/60;
-  int second = ss % 60;
-  int minute = ss/60;
-  
-	String timeString = str(minute)+":"+(second); // Requirement #4: Get the mm:ss string using String convertFramesToTimeString(int frames)
+
+	String timeString = str(minute)+":"+nf(second,2); // Requirement #4: Get the mm:ss string using String convertFramesToTimeString(int frames)
 
 	textAlign(LEFT, BOTTOM);
 
