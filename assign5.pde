@@ -576,9 +576,8 @@ void drawTimerUI(){
 }
 
 String convertFramesToTimeString(int frames){ 
-  int ss = gameTimer/60;
-  int second = ss % 60;
-  int minute = ss/60;
+  int second = floor((frames % 3600)/60);
+  int minute = floor(frames / 3600);
   
   return nf(minute, 2) + ":" + nf(second, 2);
 }
