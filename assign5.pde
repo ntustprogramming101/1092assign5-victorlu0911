@@ -564,7 +564,7 @@ void drawTimerUI(){
   int second = ss;
   int minute = ss/60;
   
-  ss %= 60;
+  second %= 60;
   
 	String timeString = str(floor(minute))+":"+nf(second,2); // Requirement #4: Get the mm:ss string using String convertFramesToTimeString(int frames)
 
