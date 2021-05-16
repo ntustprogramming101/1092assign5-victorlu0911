@@ -560,10 +560,8 @@ void drawDepthUI(){
 }
 
 void drawTimerUI(){
-  int second = floor((gameTimer % 3600) / 60);
-  int minute = floor(gameTimer / 3600);
-  
-	String timeString = str(floor(minute))+":"+nf(second,2); // Requirement #4: Get the mm:ss string using String convertFramesToTimeString(int frames)
+ 
+	String timeString = convertFramesToTimeString(gameTimer); // Requirement #4: Get the mm:ss string using String convertFramesToTimeString(int frames)
 
 	textAlign(LEFT, BOTTOM);
 
@@ -571,29 +569,32 @@ void drawTimerUI(){
 	fill(0, 120);
 	text(timeString, 3, height + 3);
 
-	// Actual Time Text
-  if(minute >= 2){
-	color timeTextColor = #00ffff;
-  fill(timeTextColor);
-  text(timeString, 0, height);		// Requirement #5: Get the correct color using color getTimeTextColor(int frames)
-  }else if(minute < 2 && minute >= 1){
-  color timeTextColor = #ffffff;
+  //Actual Time Text
+  color timeTextColor = getTimeTextColor(gameTimer);
   fill(timeTextColor);
   text(timeString, 0, height);
-  }else if(minute < 1 && second >=30){
-  color timeTextColor = #ffcc00;
-  fill(timeTextColor);
-  text(timeString, 0, height);
-  }else if(second < 30 && second >=10){
-  color timeTextColor = #ff6600;
-  fill(timeTextColor);
-  text(timeString, 0, height);
+}
+
+String convertFramesToTimeString(int frames){ 
+  int ss = gameTimer/60;
+  int second = ss % 60;
+  int minute = ss/60;
+  
+  return nf(minute, 2) + ":" + nf(second, 2);
+}
+
+color getTimeTextColor(int frames){
+  if (frames > 7200){
+    return #00ffff;
+  }else if(frames >= 3600){
+    return  #ffffff;
+  }else if(frames >= 1800){
+    return #ffcc00;
+  }else if(frames >= 600){
+   return #ff6600;
   }else{
-  color timeTextColor = #ff0000;
-  fill(timeTextColor);
-  text(timeString, 0, height);
+    return #ff0000;
   }
-	
 }
 
 void keyPressed(){
